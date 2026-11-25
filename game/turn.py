@@ -51,7 +51,7 @@ def find_computer_move(hand: list):
         by_number = sorted(list(s), key=lambda tile: tile[0])
         for i in range(len(by_number) - 3):
             x = 0
-            while i + x + 3 <= len(by_number)
+            while i + x + 3 <= len(by_number):
                 if is_valid_set(by_number[i: i + 3 + x]):
                     x +=1
                 else:
