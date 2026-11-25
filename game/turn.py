@@ -1,4 +1,4 @@
-from tiles import play_set, is_valid_set
+from .tiles import play_set, is_valid_set
 from inputs.get_string import get_string
 
 
@@ -8,8 +8,8 @@ def read_player_move(hand: list):
     valid_move = False
     while not valid_move:
         try:
-            user_choice = get_string("Choose tile positions or D to draw > ").strip()
-            if user_choice.lower() == "d":
+            user_choice = get_string("Choose tile positions or D to draw > ").strip().lower()
+            if user_choice == "d":
                 return None
             numbers_list = user_choice.split(" ")
             if len(numbers_list) < 3:
@@ -41,13 +41,13 @@ def find_computer_move(hand: list):
         if not tile[0] in numbers:
             numbers[tile[0]] = set()
         if not tile[1] in colors:
-            numbers[tile[1]] = set()
+            colors[tile[1]] = set()
         numbers[tile[0]].add(tile)
         colors[tile[1]].add(tile)
-    for s in numbers:
-        if is_valid_set():
+    for s in numbers.values():
+        if is_valid_set(s):
             valids.append(s)
-    for s in colors:
+    for s in colors.values():
         by_number = sorted(list(s), key=lambda tile: tile[0])
         for i in range(len(by_number) - 3):
             x = 0
@@ -61,7 +61,7 @@ def find_computer_move(hand: list):
     if not valids:
         return None
     longest = sorted(valids, key= lambda p: len(p))[0]
-    return longest
+    return [hand.index(tile) for tile in longest]
 
 
 

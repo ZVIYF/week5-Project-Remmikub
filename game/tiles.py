@@ -43,9 +43,13 @@ def check_numbers_sequance(tiles: list, difference = 1)-> bool:
 
 
 def play_set(hand: list, table: list, indexes: list):
-    move = [hand.pop(i) for i in indexes]
+    sort_indexes = sorted(indexes, reverse=True)
+    move = []
+    for index in sort_indexes:
+        tile = hand.pop(index)
+        move.append(tile)
     table.append(move)
 
 
-def take_tile(pool: list, hand:list)
+def take_tile(pool: list, hand:list):
     hand.append(pool.pop())
